@@ -1,0 +1,72 @@
+.nav-link {
+    color:white
+}
+
+.navbar-nav .nav-link.active{
+    color: aqua
+}
+
+.navbar-brand img {
+    width: 35px;
+}
+
+.navbar navbar-expand-lg bg-dark {
+    color: black;
+}
+
+.btn-group-lg>.btn, .btn-lg{
+    width: 350px;
+    height: 50px;
+    margin: 10px;
+
+}
+
+.main-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px;
+}
+
+.sec {
+    margin: 12px;
+}
+
+.login-window {
+    width: 500px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.register-window {
+    width: 500px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  flex: 1;
+}
+
+footer.footer {
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  border-top: 1px solid #ccc;
+}

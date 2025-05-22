@@ -1,50 +1,29 @@
-{% extends 'dental/base.html' %}
+{% extends "dental/base.html" %}
+{% load static %}
 
 {% block content %}
-    <section class="sec">
-        <h2>Make an appointment</h2>
-      <div>
-          <input type="hidden" id="appId" />
-          <p>
-              Ім'я:<br />
-              <input id="appName" />
+<div class="container mt-4" style="max-width:520px;">
+  <h3 class="mb-3 text-center">Запис на прийом</h3>
 
-          </p>
-          <p>
-              Вік:<br />
-              <input id="appAge" type="number" />
-          </p>
+  {% if messages %}
+    {% for m in messages %}
+      <div class="alert alert-{{ m.tags }}">{{ m }}</div>
+    {% endfor %}
+  {% endif %}
 
-          <p>
-              Номер телфону: <br>
-              <input id="appPhone" />
-          </p>
-          <p>
-            Причина візиту: <br>
-            <input id="appReason" />
-        </p>
-          <p>
-              <button id="saveAppoint">Зберегти</button>
-          </p>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+      <div class="mb-3">
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.errors }}
       </div>
-      <table>
-          <thead>
-              <tr>
-                  <th>Ім'я</th>
-                  <th>Вік</th>
-                  <th>Номер телефону</th>
-                  <th>Причина візиту</th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-          </tbody>
-      </table>
-    </section>
-{% endblock %}
+    {% endfor %}
 
-{% block scripts %}
-    <script src="/public/js/appointment.js" defer></script>
-    <script src="/public/js/auth.js" defer></script>
-    <script src="/public/js/logout.js" defer></script>
+    <button type="submit" class="btn btn-success w-100">Надіслати</button>
+  </form>
+</div>
 {% endblock %}

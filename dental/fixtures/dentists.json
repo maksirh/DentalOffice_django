@@ -1,0 +1,1 @@
+[{"model": "dental.dentist", "pk": 1, "fields": {"name": "Alex", "age": 40, "experience": 15, "phoneNumber": "+0123456789", "image": "dentists_images/profile.jpg"}}, {"model": "dental.dentist", "pk": 2, "fields": {"name": "Robert", "age": 30, "experience": 10, "phoneNumber": "+0859327495", "image": "dentists_images/profile_RQDaPDo.jpg"}}]

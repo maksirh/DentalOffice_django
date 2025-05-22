@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+      <section>
+         <form action="{% url 'users:register' %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Зареєструватись</button>
+            </form>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

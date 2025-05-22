@@ -19,13 +19,11 @@
   </div>
 
   <div class="text-center mt-4">
-    <button id="dentistRegPage" class="btn btn-primary btn-lg">Список стоматологів</button><br>
-    <button id="patientRegPage" class="btn btn-primary btn-lg mt-2">Зареєструвати пацієнта</button>
+    <button class="btn btn-primary btn-lg"
+        onclick="location.href='{% url 'dentists' %}'">
+    Список стоматологів
+</button>
   </div>
 </section>
-
-{% endblock %}
-
-{% block scripts %}
 
 {% endblock %}

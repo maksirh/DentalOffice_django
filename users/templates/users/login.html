@@ -1,0 +1,18 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+      <section>
+        <div class = "login-window">
+            <form action="{% url 'users:login' %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Увійти</button>
+            </form>
+          <br>
+        </div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

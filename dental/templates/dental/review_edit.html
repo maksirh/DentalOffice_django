@@ -1,0 +1,12 @@
+{% extends "dental/base.html" %}
+{% block content %}
+<div class="container mt-4" style="max-width:520px;">
+  <h4 class="mb-3">Редагувати відгук</h4>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.review }}
+    <button class="btn btn-success mt-2">Зберегти</button>
+    <a class="btn btn-secondary mt-2" href="{% url 'reviews' %}">Скасувати</a>
+  </form>
+</div>
+{% endblock %}

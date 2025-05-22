@@ -1,7 +1,5 @@
-from tkinter.constants import CASCADE
-
 from django.db import models
-
+from users.models import User
 
 class Dentist(models.Model):
     name = models.CharField(max_length=128)
@@ -28,6 +26,9 @@ class Appointment(models.Model):
     phoneNumber = models.CharField(max_length=15)
     reason = models.TextField()
 
+    def __str__(self):
+        return f"{self.name} ({self.phoneNumber})"
+
 class WorkerType(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField()
@@ -52,7 +53,20 @@ class Service(models.Model):
     def __str__(self):
         return self.name
 
-#class Review(models.Model):
-#    review = models.TextField()
+class Review(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="reviews",
+        verbose_name="Користувач",
+    )
+    review = models.TextField("Відгук")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.user.username}: {self.review[:30]}"
 
 

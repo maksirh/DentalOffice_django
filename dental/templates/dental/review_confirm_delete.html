@@ -1,0 +1,13 @@
+{% extends "dental/base.html" %}
+{% block content %}
+<div class="container mt-4" style="max-width:460px;">
+  <h4 class="mb-3">Підтвердити видалення</h4>
+  <p>{{ object.review|linebreaksbr }}</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger">Так, видалити</button>
+    <a class="btn btn-secondary" href="{% url 'reviews' %}">Скасувати</a>
+  </form>
+</div>
+{% endblock %}

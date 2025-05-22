@@ -1,0 +1,29 @@
+{% extends 'dental/base.html' %}
+
+{% block content %}
+    <section class="sec">
+
+      <h2>Список пацієнтів</h2>
+
+        {% for patient in patients %}
+            <div class="card" style="width: 18rem;">
+                <img src=" {{ patient.image.url }} " class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">
+                        Ім'я: {{ patient.name }}
+                        <br>
+                        Вік: {{ patient.age }} років
+                        <br>
+                        Номер телефону: {{ patient.phoneNumber }}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+
+
+    </section>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

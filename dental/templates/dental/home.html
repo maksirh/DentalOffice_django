@@ -1,19 +1,31 @@
 {% extends 'dental/base.html' %}
 
 {% block content %}
-<section>
-  <div class = "main-buttons">
-    <div id="admin-buttons" style="display: none;">
-    <button type="button" id="dentistRegPage" class="btn btn-primary btn-lg">Зареєструвати дантиста</button>
-      <br>
-    <button type="button" id="patientRegPage" class="btn btn-primary btn-lg">Зареєструвати паціента</button>
+<section class="container my-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4">   {# 3 стовпці починаючи з ≥ 768 px #}
+    {% for service in services %}
+      <div class="col">
+        <div class="card h-100">
+          <img src="{{ service.image.url }}" class="card-img-top" alt="">
+          <div class="card-body">
+            <p class="card-text">
+              {{ service.name }}<br>
+              Опис: {{ service.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
   </div>
-    </div>
-  </section>
+
+  <div class="text-center mt-4">
+    <button id="dentistRegPage" class="btn btn-primary btn-lg">Список стоматологів</button><br>
+    <button id="patientRegPage" class="btn btn-primary btn-lg mt-2">Зареєструвати пацієнта</button>
+  </div>
+</section>
+
 {% endblock %}
 
 {% block scripts %}
-  <script src="/static/js/home.js" defer></script>
-  <script src="/public/js/auth.js" defer></script>
-  <script src="/public/js/logout.js" defer></script>
+
 {% endblock %}

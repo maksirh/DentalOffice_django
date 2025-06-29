@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib import auth
 from django.urls import reverse
-
+from .forms import ProfileUpdateForm
 from users.models import User
 from users.forms import UserLoginForm, UserRegistrationForm
 
@@ -40,3 +40,15 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('users:profile')  # заміни на свій url name
+    else:
+        form = ProfileUpdateForm(instance=request.user)
+
+    return render(request, 'users/profile.html', {'form': form})

@@ -15,10 +15,11 @@
   {% endif %}
 
   {% if user.is_authenticated %}
-    <form method="post" class="mb-4">
+    <form method="post" class="mb-4 my-review-form">
       {% csrf_token %}
       {{ form.non_field_errors }}
       <div class="mb-3">
+        <label for="my-review-field" class="my-label">Ваш відгук</label>
         {{ form.review }}
         {{ form.review.errors }}
       </div>
@@ -32,7 +33,7 @@
   {% endif %}
 
   {% for r in reviews %}
-    <div class="border rounded-3 p-3 mb-3">
+    <div class="border rounded-3 p-3 mb-3 rev">
       <div class="d-flex justify-content-between">
         <strong>{{ r.user.get_full_name|default:r.user.username }}</strong>
         <small class="text-muted">{{ r.created_at|date:"d.m.Y H:i" }}</small>
@@ -40,8 +41,8 @@
       <p class="mt-2 mb-0">{{ r.review|linebreaksbr }}</p>
       {% if user == r.user %}
         <div class="mt-2">
-          <a href="{% url 'review_edit' r.pk %}" class="btn btn-sm btn-outline-secondary me-2">Редагувати</a>
-          <form action="{% url 'review_delete' r.pk %}" method="post" class="d-inline">
+          <a href="{% url 'dental:review_edit' r.pk %}" class="btn btn-sm btn-outline-secondary me-2">Редагувати</a>
+          <form action="{% url 'dental:review_delete' r.pk %}" method="post" class="d-inline">
             {% csrf_token %}
             <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Видалити відгук?');">Видалити</button>
           </form>

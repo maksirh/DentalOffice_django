@@ -6,7 +6,7 @@
     {% csrf_token %}
     {{ form.review }}
     <button class="btn btn-success mt-2">Зберегти</button>
-    <a class="btn btn-secondary mt-2" href="{% url 'reviews' %}">Скасувати</a>
+    <a class="btn btn-secondary mt-2" href="{% url 'dental:reviews' %}">Скасувати</a>
   </form>
 </div>
 {% endblock %}

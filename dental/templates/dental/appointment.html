@@ -1,29 +1,39 @@
 {% extends "dental/base.html" %}
 {% load static %}
+{% load form_tags %}
 
 {% block content %}
-<div class="container mt-4" style="max-width:520px;">
-  <h3 class="mb-3 text-center">Запис на прийом</h3>
+<section class="container my-5" style="max-width: 600px;">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4">
 
-  {% if messages %}
-    {% for m in messages %}
-      <div class="alert alert-{{ m.tags }}">{{ m }}</div>
-    {% endfor %}
-  {% endif %}
+      <h3 class="text-center mb-4 text-primary">📅 Запис на прийом</h3>
 
-  <form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.non_field_errors }}
+      {% if messages %}
+        {% for m in messages %}
+          <div class="alert alert-{{ m.tags }} alert-dismissible fade show" role="alert">
+            {{ m }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
 
-    {% for field in form %}
-      <div class="mb-3">
-        {{ field.label_tag }}
-        {{ field }}
-        {{ field.errors }}
-      </div>
-    {% endfor %}
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
 
-    <button type="submit" class="btn btn-success w-100">Надіслати</button>
-  </form>
-</div>
+        {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {{ field|add_class:"form-control" }}
+            <div class="form-text text-danger">{{ field.errors }}</div>
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary w-100 mt-3 py-2 fs-5">Надіслати</button>
+      </form>
+
+    </div>
+  </div>
+</section>
 {% endblock %}

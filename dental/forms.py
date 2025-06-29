@@ -10,3 +10,10 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model  = Review
         fields = ("review",)
+        widgets = {
+            'review': forms.Textarea(attrs={
+                'id': 'my-review-field',
+                'class': '',
+                'rows': 5
+            }),
+        }

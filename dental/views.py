@@ -11,14 +11,11 @@ from django.urls import reverse, reverse_lazy
 def home(request):
     context = {
         'services': Service.objects.all(),
+        'dentists': Dentist.objects.all(),
+        'reviews': Review.objects.all(),
     }
     return render(request, 'dental/home.html', context)
 
-def dentists(request):
-    context = {
-        'dentists': Dentist.objects.all(),
-    }
-    return render(request, 'dental/dentists.html', context)
 
 def patients(request):
     context = {
@@ -42,8 +39,6 @@ def reviews(request):
     all_reviews = Review.objects.select_related("user")
     return render(request, "dental/reviews.html",{"form": form, "reviews": all_reviews})
 
-def profile(request):
-    return render(request, 'dental/profile.html')
 
 def appointment(request):
     if request.method == "POST":
@@ -59,18 +54,17 @@ def appointment(request):
 
 
 class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model         = Review
-    form_class    = ReviewForm
+    model = Review
+    form_class = ReviewForm
     template_name = "dental/review_edit.html"
-    success_url   = reverse_lazy("reviews")
+    success_url = reverse_lazy("reviews")
 
-    # дозвіл лише автору
     def test_func(self):
         return self.request.user == self.get_object().user
 
 
 class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model       = Review
+    model = Review
     success_url = reverse_lazy("reviews")
     template_name = "dental/review_confirm_delete.html"
 

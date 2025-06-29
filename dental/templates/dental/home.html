@@ -1,28 +1,75 @@
 {% extends 'dental/base.html' %}
-
 {% block content %}
-<section class="container my-4">
-  <div class="row row-cols-1 row-cols-md-3 g-4">   {# 3 стовпці починаючи з ≥ 768 px #}
-    {% for service in services %}
+
+<section class="container py-5">
+  <!-- Вітання -->
+  <div class="text-center mb-5">
+    <h1 class="display-5 fw-bold text-primary">Ласкаво просимо до DentalOffice!</h1>
+    <p class="lead mt-3">
+      Ми дбаємо про Вашу усмішку щодня — <br>
+      запишіться на прийом просто зараз і зробіть крок до здорових зубів!
+    </p>
+    <a href="{% url 'dental:appointment' %}" class="btn btn-lg btn-outline-primary mt-4 px-5 py-2 shadow-sm">
+      🦷 Записатись на прийом
+    </a>
+  </div>
+
+  <!-- Послуги -->
+  <div class="mb-5">
+    <h2 class="text-center mb-4 textSp">Наші послуги</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for service in services %}
       <div class="col">
-        <div class="card h-100">
-          <img src="{{ service.image.url }}" class="card-img-top" alt="">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.name }}">
           <div class="card-body">
+            <h5 class="card-title">{{ service.name }}</h5>
+            <p class="card-text text-muted">{{ service.description }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Стоматологи -->
+  <div class="mb-5">
+    <h2 class="text-center mb-4 textSp">Наші спеціалісти</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for dentist in dentists %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ dentist.image.url }}" class="card-img-top" alt="{{ dentist.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ dentist.name }}</h5>
             <p class="card-text">
-              {{ service.name }}<br>
-              Опис: {{ service.description }}
+              Вік: {{ dentist.age }}<br>
+              Досвід: {{ dentist.experience }} років<br>
+              Телефон: {{ dentist.phoneNumber }}
             </p>
           </div>
         </div>
       </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
 
-  <div class="text-center mt-4">
-    <button class="btn btn-primary btn-lg"
-        onclick="location.href='{% url 'dentists' %}'">
-    Список стоматологів
-</button>
+  <!-- Відгуки -->
+  <div class="mb-5">
+    <h2 class="text-center mb-4 textSp">Відгуки наших клієнтів</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for r in reviews %}
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ r.user.get_full_name|default:r.user.username }}</h5>
+            <p class="card-text">{{ r.review|linebreaksbr }}</p>
+            <p class="text-muted text-end small">{{ r.created_at|date:"d.m.Y H:i" }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </section>
 

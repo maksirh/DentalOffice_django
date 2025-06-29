@@ -1,0 +1,40 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 600px;">
+  <h2 class="text-center mb-4">Профіль користувача</h2>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="mb-3">
+          <label class="form-label">Ім’я</label>
+          {{ form.first_name }}
+          {{ form.first_name.errors }}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Прізвище</label>
+          {{ form.last_name }}
+          {{ form.last_name.errors }}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          {{ form.email }}
+          {{ form.email.errors }}
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Зберегти зміни</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="mt-4 text-center">
+    <a href="{% url 'users:logout' %}" class="btn btn-outline-danger">Вийти з акаунту</a>
+  </div>
+</div>
+{% endblock %}
